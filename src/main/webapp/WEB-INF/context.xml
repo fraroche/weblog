@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context privileged="true">
+	<!-- Specify a JDBC datasource
+	<Resource name="jdbc/mydatabase" auth="Container" type="javax.sql.DataSource"
+		username="YOUR_USERNAME" password="YOUR_PASSWORD" driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://mysql.metawerx.net:3306/YOUR_DATABASE_NAME?autoReconnect=true"
+		validationQuery="select 1" maxActive="10" maxIdle="4" /-->	
+
+	<!-- Specify the security realm and location of the users file -->
+<!-- 	<Realm className="org.apache.catalina.realm.MemoryRealm"/> -->
+
+
+<!-- 	<Realm className="org.apache.catalina.realm.JNDIRealm"  -->
+<!-- 		debug="99"  -->
+<!-- 		connectionURL="ldap://ad.si2m.tec:3268"  -->
+<!-- 		connectionName="CN=idei080,OU=SI2M,OU=Comptes,OU=SI2M,DC=ad,DC=si2m,DC=tec"  -->
+<!-- 		connectionPassword="*****"  -->
+<!-- 		authentication="simple"  -->
+		
+<!-- 		userBase="DC=ad,DC=si2m,DC=tec"  -->
+<!-- 		userSubtree="true"  -->
+<!-- 		userSearch="(sAMAccountName={0})"  -->
+<!-- 		userRoleName="memberOf"  -->
+		
+<!-- 		roleBase="DC=ad,DC=si2m,DC=tec"  -->
+<!-- 		roleSubtree="true"  -->
+<!-- 		roleSearch="(member={0})"  -->
+<!-- 		roleName="CN"  -->
+<!-- 	/> -->
+
+	<!--Realm className="org.apache.catalina.realm.JNDIRealm" 
+		debug="99" 
+		connectionURL="ldap://ad.si2m.tec:3268" 
+		connectionName="CN=SVC_AUTH_SI2M,OU=Compte de service,OU=Serveurs,OU=Ressources,OU=SI2M,DC=ad,DC=si2m,DC=tec" 
+		connectionPassword="X3B5X5E4" 
+		authentication="simple" 
+		
+		userBase="DC=ad,DC=si2m,DC=tec" 
+		userSubtree="true" 
+		userSearch="(sAMAccountName={0})" 
+		userRoleName="memberOf" 
+		
+		roleBase="DC=ad,DC=si2m,DC=tec" 
+		roleSubtree="true" 
+		roleSearch="(member={0})" 
+		roleName="CN" 
+	/-->
+	<!--Realm className="org.apache.catalina.realm.JNDIRealm" 
+		debug="99" 
+		connectionURL="ldap://ad.si2m.tec:3268" 
+		connectionName="CN=idei080,OU=SI2M,OU=Comptes,OU=SI2M,DC=ad,DC=si2m,DC=tec" 
+		connectionPassword="secret" 
+		authentication="simple" 
+		
+		userBase="DC=ad,DC=si2m,DC=tec" 
+		userSubtree="true" 
+		userSearch="(sAMAccountName={0})" 
+		userPassword="userPassword" 
+		
+		roleBase="DC=ad,DC=si2m,DC=tec" 
+		roleSubtree="true" 
+		roleSearch="(member={0})" 
+		roleName="CN" 
+	/-->
+	
+	<!--
+		The following configuration uses the CAS 2.0 protocol and a static
+		properties file to define allowed users to the Tomcat manager application.
+		The content of manager-users.properties contains entries like the following:
+		
+		  admin=manager-gui,manager-script,manager-jmx,manager-status
+		  operator=manager-status
+		  deployer=manager-script
+		
+		Where admin, operator, and deployer are valid logins for the CAS server.
+		The path to the properties file is relative to $CATALINA_HOME.
+		
+		This example also configures the container for CAS single sign-out.
+	-->
+	<!-- Realm	className="org.jasig.cas.client.tomcat.v6.PropertiesCasRealm"
+			propertiesFilePath="conf/manager-user-roles.properties" />
+	
+	<Valve	className="org.jasig.cas.client.tomcat.v6.Cas20CasAuthenticator"
+			encoding="UTF-8" 
+			casServerLoginUrl="http://localhost:8090/cas/login" 
+			casServerUrlPrefix="http://localhost:8090/cas/" 
+			serverName="localhost:8080" /-->
+<!-- 			casServerLoginUrl="https://linmb028827s:8443/cas/login"  -->
+<!-- 			casServerUrlPrefix="https://linmb028827s:8443/cas/"  -->
+<!-- 			serverName="linmb028827s:8080" /> -->
+
+	<!--Valve	className="org.jasig.cas.client.tomcat.v6.SingleSignOutValve" 
+			artifactParameterName="SAMLart" /-->
+	<!--
+		The following configuration uses the SAML 1.1 protocol and role data
+		provided by the assertion to enable dynamic server-driven role data.
+		The attribute used for role data is "memberOf".
+	-->
+	<Realm	className="org.jasig.cas.client.tomcat.v6.AssertionCasRealm"
+			roleAttributeName="memberOf"/>
+	
+	<Valve	className="org.jasig.cas.client.tomcat.v6.Saml11Authenticator"
+			encoding="UTF-8" 
+                               casServerLoginUrl="http://lincsnt:8090/cas/login" 
+                               casServerUrlPrefix="http://lincsnt:8090/cas/" 
+                               serverName="linmb028827s:8080" />
+<!-- 			casServerLoginUrl="http://localhost:8090/cas/login"  -->
+<!-- 			casServerUrlPrefix="http://localhost:8090/cas/"  -->
+<!-- 			serverName="localhost:8080" /> -->
+<!-- 			casServerLoginUrl="https://linmb028827s:8443/cas/login" -->
+<!-- 			casServerUrlPrefix="https://linmb028827s:8443/cas/" -->
+<!-- 			serverName="linmb028827s:8080"/> -->
+	
+	<Valve	className="org.jasig.cas.client.tomcat.v6.SingleSignOutValve"
+			artifactParameterName="SAMLart"/>
+	
+</Context>

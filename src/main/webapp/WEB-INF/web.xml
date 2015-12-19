@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+	<display-name>weblog</display-name>
+	<description>IHM des logs</description>
+	
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/conf/log4j.lcf</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>log4jRefreshInterval</param-name>
+		<param-value>10000</param-value>
+	</context-param>
+	
+	<servlet>
+		<servlet-name>monitoring</servlet-name>
+		<display-name>monitoring</display-name>
+		<servlet-class>fr.si2m.monitoring.MonitorServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>explorer</servlet-name>
+		<display-name>explorer</display-name>
+		<servlet-class>fr.si2m.monitoring.ExplorerServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>monitoring</servlet-name>
+		<url-pattern>/monitoring</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>explorer</servlet-name>
+		<url-pattern>/explorer</url-pattern>
+	</servlet-mapping>
+	
+	<session-config>
+		<session-timeout>120</session-timeout>
+	</session-config>
+	 
+	<mime-mapping>
+		<extension>html</extension>
+		<mime-type>text/html</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>txt</extension>
+		<mime-type>text/plain</mime-type>
+	</mime-mapping>
+	
+	<welcome-file-list>
+<!-- 		<welcome-file>index.jsp</welcome-file> -->
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>all</web-resource-name>
+			<url-pattern>/*</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+		</web-resource-collection>
+		
+		<auth-constraint>
+			<role-name>COMMUN</role-name>
+		</auth-constraint>
+		
+		<user-data-constraint>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	
+	<login-config>
+		<auth-method>BASIC</auth-method>
+	</login-config>
+
+<!-- 	<login-config id="LoginConfig_1"> -->
+<!-- 		<auth-method>FORM</auth-method> -->
+<!-- 		<realm-name>Example Form-Based Authentication Area</realm-name> -->
+<!-- 		<form-login-config id="FormLoginConfig_1"> -->
+<!-- 			<form-login-page>/login.html</form-login-page> -->
+<!-- 			<form-error-page>/error.jsp</form-error-page> -->
+<!-- 		</form-login-config> -->
+<!-- 	</login-config> -->
+	
+<!-- 	<security-role> -->
+<!-- 		<role-name>tomcat</role-name> -->
+<!-- 	</security-role> -->
+	<security-role>
+		<role-name>COMMUN</role-name>
+	</security-role>
+</web-app>

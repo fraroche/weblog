@@ -1,0 +1,14 @@
+<jboss-web>
+<!-- Specific config jboss 5 -->
+<!-- 	<security-domain>java:/jaas/web-console</security-domain> -->
+
+<!-- Specific config jboss 6.2 -->
+<!-- see https://access.redhat.com/documentation/en-US/JBoss_Enterprise_Application_Platform/6.2/html-single/Migration_Guide/index.html#sect-Security_Changes -->
+<!-- see https://access.redhat.com/documentation/en-US/JBoss_Enterprise_Application_Platform/6.2/html-single/Administration_and_Configuration_Guide/index.html#topic4732_simpleusers -->
+<!-- 	<security-domain>web-console</security-domain> -->
+	
+<!-- 	<security-role> -->
+<!-- 		<role-name>tomcat</role-name> -->
+<!-- 		<principal-name>admin</principal-name> -->
+<!-- 	</security-role> -->
+</jboss-web>
